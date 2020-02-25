@@ -20,7 +20,7 @@ app.post("/", function(req, res) {
     
     //build up the URL for the JSON query, API Key is // secret and needs to be obtained by signup 
         const units = "imperial";
-        const apiKey = "67f6b382921c1e89b39b20d4f9556f22";
+        const apiKey = "d31c88f79c5516e11f6d03e4ca576a8e";
         const url = "https://api.openweathermap.org/data/2.5/weather?zip=" + zip +  "&units=" + units + "&APPID=" + apiKey;
     
     // this gets the data from Open WeatherPI
@@ -31,6 +31,8 @@ app.post("/", function(req, res) {
         response.on("data", function(data){
             const weatherData = JSON.parse(data);
             const temp = weatherData.main.temp;
+            const humidity = weatherData.main.humidity;
+            const speed = weatherData.wind.speed;
             const city = weatherData.name;
             const weatherDescription = weatherData.weather[0].description;
             const icon = weatherData.weather[0].icon;
@@ -38,7 +40,7 @@ app.post("/", function(req, res) {
             
             // displays the output of the results
             res.write("<h1> The weather is " + weatherDescription + "<h1>");
-            res.write("<h2>The Temperature in " + city + " " + zip + " is " + temp + " Degrees Fahrenheit<h2>");
+            res.write("<h2>The Temperature in " + city + " " + zip + " is " + temp + " Degrees Fahrenheit <h2>");
             res.write("<img src=" + imageURL +">");
             res.send();
         });
@@ -51,3 +53,8 @@ app.post("/", function(req, res) {
 app.listen(3000, function() {
 console.log ("Server is running on port //3000")
 });
+
+//change weather to city 
+//humidity .humidity
+//wind.speed
+// use https://openweathermap.org/current
